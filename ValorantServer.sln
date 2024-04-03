@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValorantServer.API", "ValorantServer.API\ValorantServer.API.csproj", "{A9CF6E06-0B14-4782-895E-5CD32750A881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValorantServer.Domain", "ValorantServer.Domain\ValorantServer.Domain.csproj", "{915AB20B-688D-45C6-9B16-E949DD035098}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9CF6E06-0B14-4782-895E-5CD32750A881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CF6E06-0B14-4782-895E-5CD32750A881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CF6E06-0B14-4782-895E-5CD32750A881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CF6E06-0B14-4782-895E-5CD32750A881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{915AB20B-688D-45C6-9B16-E949DD035098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{915AB20B-688D-45C6-9B16-E949DD035098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{915AB20B-688D-45C6-9B16-E949DD035098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{915AB20B-688D-45C6-9B16-E949DD035098}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2FD9738-4D72-4AF2-B0B7-6FFF728E9097}
+	EndGlobalSection
+EndGlobal
