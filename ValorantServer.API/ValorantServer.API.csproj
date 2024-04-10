@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ValorantServer.Domain\ValorantServer.Domain.csproj" />
+    <ProjectReference Include="..\ValorantServer.Infra\ValorantServer.Infra.csproj" />
   </ItemGroup>
 
 </Project>
