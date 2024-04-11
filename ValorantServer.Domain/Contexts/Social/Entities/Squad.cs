@@ -7,7 +7,7 @@ public class Squad : BaseEntity
 {
     public IEnumerable<Player> Players { get; private set; }
 
-    public Squad(IEnumerable<Player> players)
+    public Squad(Guid id, IEnumerable<Player> players) : base(id)
     {
         if (players is null)
             throw new DomainException("Players cannot be null.");

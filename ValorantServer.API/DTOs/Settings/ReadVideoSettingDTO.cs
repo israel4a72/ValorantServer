@@ -3,15 +3,15 @@ using ValorantServer.Domain.Contexts.Settings.Extensions;
 
 namespace ValorantServer.API.DTOs.Settings
 {
-    public class UpdateGraphicsDTO
+    public class ReadVideoSettingDTO
     {
         public Guid PlayerId { get; set; }
         public string TextureLevelName { get; set; }
 
-        public UpdateGraphicsDTO(Guid playerId, ETextureLevel textureLevel)
+        public ReadVideoSettingDTO(Guid playerId, EQualityLevel textureLevel)
         {
             PlayerId = playerId;
-            TextureLevelName = textureLevel.GetTextureLevelName();
+            TextureLevelName = textureLevel.GetQualityLevelName();
         }
     }
 }

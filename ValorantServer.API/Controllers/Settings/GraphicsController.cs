@@ -1,24 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
 using ValorantServer.API.DTOs.Settings;
 using ValorantServer.API.DTOs.Settings.Extensions;
+using ValorantServer.Domain.Shared;
 using ValorantServer.Infra.Repositories.Settings;
 
 namespace ValorantServer.API.Controllers.Settings
 {
     public class GraphicsController : BaseAPIController
     {
-        private readonly GraphicsRepository _graphicsRepository = new GraphicsRepository();
+        private readonly VideoSettingRepository _videoSettingRepository;
 
+        public GraphicsController(VideoSettingRepository graphicsRepository)
+        {
+            _videoSettingRepository = graphicsRepository;
+        }
 
         [HttpGet("player/{playerId:guid}")]
-        public async Task<ActionResult<IEnumerable<ReadGraphicsDTO>>> GetFromPlayer(Guid playerId)
+        public async Task<ActionResult<IEnumerable<ReadVideoSettingDTO>>> GetFromPlayer(Guid playerId)
         {
             try
             {
-                var graphicsSetting = await _graphicsRepository.GetFromPlayerAsync(playerId);
-                var readGraphicsDTO = graphicsSetting.MapToReadGraphicsDTO();
+                var videoSetting = await _videoSettingRepository.GetFromPlayerAsync(playerId);
 
-                return Ok(readGraphicsDTO);
+                if (videoSetting is null) return NotFound();
+
+                var readVideoSettingDTO = videoSetting;//.MapToReadVideoSettingDTO();
+
+                return Ok(readVideoSettingDTO);
             }
             catch
             {
@@ -27,19 +35,19 @@ namespace ValorantServer.API.Controllers.Settings
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReadGraphicsDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<ReadVideoSettingDTO>>> Get()
         {
             try
             {
-                var graphicsSettings = await _graphicsRepository.GetAllAsync();
+                var graphicsSettings = await _videoSettingRepository.GetAllAsync();
 
                 if (graphicsSettings.Count() == 0)
-                    return NoContent();
+                    return NotFound();
 
                 Console.WriteLine(graphicsSettings);
-                var readAllGraphicsDTO = graphicsSettings.Select(g => g.MapToReadGraphicsDTO());
+                var readAllGraphicsDTO = graphicsSettings.Select(g => g/*.MapToReadVideoSettingDTO()*/);
 
-                return Ok(readAllGraphicsDTO);
+                return Ok(new { status = 200, data = readAllGraphicsDTO, mensagem = "Deu tudo certo" });
             }
             catch
             {
@@ -48,12 +56,19 @@ namespace ValorantServer.API.Controllers.Settings
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update([FromBody] UpdateGraphicsDTO updateGraphicsDTO)
+        public async Task<ActionResult> Update([FromBody] UpdateVideoSettingDTO updateGraphicsDTO)
         {
             try
             {
-                var graphicsSetting = updateGraphicsDTO.MapToGraphicsSetting();
-                await _graphicsRepository.UpdateAsync(graphicsSetting);
+                if (!ModelState.IsValid) return BadRequest();
+
+                var graphicsSettingToUpdate = await _videoSettingRepository.GetFromPlayerAsync(updateGraphicsDTO.PlayerId);
+
+                if (graphicsSettingToUpdate is null) return NotFound();
+
+                var graphicsSettingUpdated = updateGraphicsDTO.MapToVideoSetting(graphicsSettingToUpdate);
+
+                await _videoSettingRepository.UpdateAsync(graphicsSettingUpdated);
 
                 return Ok();
             }

@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace ValorantServer.Domain.Shared
 {
     public abstract class BaseEntity
     {
+        public Guid Id { get; set; }
 
+        public BaseEntity(Guid id)
+        {
+            Id = id;
+        }
     }
 }

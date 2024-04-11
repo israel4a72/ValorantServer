@@ -1,6 +1,6 @@
 namespace ValorantServer.Domain.Contexts.Settings.Enums
 {
-    public enum ETextureLevel
+    public enum EQualityLevel
     {
         Undefined = 0,
         Low = 1,
